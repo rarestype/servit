@@ -1,0 +1,63 @@
+#!/bin/bash
+
+set -euo pipefail
+set -x
+
+swift --version
+swift build
+swift build --package-path Examples
+
+demo='Examples/.build/debug/Demo'
+
+PORT=8443
+ENDPOINT="https://localhost:$PORT/api/status"
+
+echo "🔐 Generating temporary self-signed certificates..."
+# Redirecting stderr to /dev/null to hide the verbose OpenSSL output
+openssl req -x509 -newkey rsa:2048 -keyout key.pem -out cert.pem -sha256 -days 1 -nodes -subj "/CN=localhost" 2>/dev/null
+
+echo "🚀 Starting the server in the background..."
+
+"$demo" &
+SERVER_PID=$!
+
+# Set up a trap to ensure the background server is killed and files are cleaned up
+# even if the script fails or is aborted via Ctrl+C.
+trap "echo '🧹 Cleaning up...'; kill $SERVER_PID 2>/dev/null; rm -f cert.pem key.pem response_body.txt" EXIT
+
+echo "⏳ Waiting for the NIO pipeline to bind to port $PORT..."
+# Wait in a loop until the server accepts connections, timing out after 10 seconds
+MAX_RETRIES=10
+RETRY_COUNT=0
+while ! nc -z localhost $PORT >/dev/null 2>&1; do
+    sleep 1
+    RETRY_COUNT=$((RETRY_COUNT+1))
+    if [ $RETRY_COUNT -ge $MAX_RETRIES ]; then
+        echo "❌ Server failed to start within 10 seconds."
+        exit 1
+    fi
+done
+
+echo "📡 Hitting $ENDPOINT with curl..."
+# -k: Trust self-signed certificates
+# -s: Silent mode (hide progress bar)
+# -w: Write out just the HTTP status code to the variable
+# -o: Save the actual response body to a temporary file
+HTTP_STATUS=$(curl -k -s -w "%{http_code}" -o response_body.txt "$ENDPOINT")
+BODY=$(cat response_body.txt)
+
+echo ""
+echo "--- Server Response ---"
+echo "Status Code: $HTTP_STATUS"
+echo "Body:        $BODY"
+echo "-----------------------"
+echo ""
+
+# Assertions
+if [ "$HTTP_STATUS" -eq 200 ] && [ "$BODY" = "OK" ]; then
+    echo "✅ TEST PASSED!"
+    exit 0
+else
+    echo "❌ TEST FAILED!"
+    exit 1
+fi

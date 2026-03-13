@@ -1,8 +1,13 @@
-.build
-.build.*
+/.build
+/.build.*
+/Examples/.build
+/Examples/.build.*
+/Examples/Package.resolved
 
 /.vscode/launch.json
 /.vscode/settings.json
+
+/*.pem
 
 /*.tar.gz
 /Package.resolved

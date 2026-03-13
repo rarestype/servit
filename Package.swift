@@ -4,7 +4,7 @@ import PackageDescription
 import CompilerPluginSupport
 
 let package: Package = .init(
-    name: "Swift Unidoc",
+    name: "servit",
     platforms: [.macOS(.v15), .iOS(.v18), .tvOS(.v18), .visionOS(.v2), .watchOS(.v11)],
     products: [
         .library(name: "HTTP", targets: ["HTTP"]),
@@ -26,6 +26,9 @@ let package: Package = .init(
         .package(url: "https://github.com/apple/swift-nio", from: "2.79.0"),
         .package(url: "https://github.com/apple/swift-nio-ssl", from: "2.27.0"),
         .package(url: "https://github.com/apple/swift-nio-http2", from: "1.33.0"),
+
+        // needed for AsyncChannel
+        .package(url: "https://github.com/apple/swift-collections", from: "1.4.0"),
     ],
     targets: [
         .target(
@@ -69,7 +72,6 @@ let package: Package = .init(
                 .product(name: "IP", package: "swift-ip"),
                 .product(name: "IP_NIOCore", package: "swift-ip"),
                 .product(name: "HTML", package: "swift-dom"),
-                .product(name: "Atomics", package: "swift-atomics"),
                 .product(name: "NIOHTTP1", package: "swift-nio"),
                 .product(name: "NIOHTTP2", package: "swift-nio-http2"),
                 .product(name: "NIOSSL", package: "swift-nio-ssl"),
