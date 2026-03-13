@@ -1,0 +1,8 @@
+.build
+.build.*
+
+/.vscode/launch.json
+/.vscode/settings.json
+
+/*.tar.gz
+/Package.resolved
