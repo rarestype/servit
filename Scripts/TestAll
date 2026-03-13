@@ -54,7 +54,7 @@ echo "-----------------------"
 echo ""
 
 # Assertions
-if [ "$HTTP_STATUS" -eq 200 ] && [ "$BODY" = "OK" ]; then
+if [ "$HTTP_STATUS" -eq 200 ] && [ "$BODY" = "MyNewAppServer: OK" ]; then
     echo "✅ TEST PASSED!"
     exit 0
 else
