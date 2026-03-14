@@ -7,9 +7,28 @@ on:
         branches: [ master ]
 
 jobs:
+    changes:
+        runs-on: ubuntu-latest
+        name: Assess changes
+        steps:
+            -   name: 💖 Checkout repository 💖
+                uses: actions/checkout@v6
+
+            -   name: 💖 Decide checks 💖
+                uses: tj-actions/changed-files@v47
+                id: changes
+                with:
+                    files_ignore: |
+                        README.md
+                        .gitignore
+        outputs:
+            code_changed: ${{ steps.changes.outputs.any_changed }}
+
     linux:
         runs-on: ubuntu-24.04
         name: Ubuntu 24.04
+        needs: changes
+        if: ${{ needs.changes.outputs.code_changed == 'true' }}
         steps:
             -   name: 💖 Install Swift 💖
                 uses: tayloraswift/swift-install-action@master
@@ -18,7 +37,7 @@ jobs:
                     swift-id: "swift-6.2.4-RELEASE-ubuntu24.04"
 
             -   name: 💖 Checkout repository 💖
-                uses: actions/checkout@v3
+                uses: actions/checkout@v6
 
             -   name: 💖 Run tests 💖
                 run: Scripts/TestDemo
@@ -34,9 +53,11 @@ jobs:
     macos:
         runs-on: macos-26
         name: macOS
+        needs: changes
+        if: ${{ needs.changes.outputs.code_changed == 'true' }}
         steps:
             -   name: 💖 Checkout repository 💖
-                uses: actions/checkout@v3
+                uses: actions/checkout@v6
 
             -   name: 💖 Select Xcode 26.3 💖
                 run: sudo xcode-select -s /Applications/Xcode_26.3.app/Contents/Developer
