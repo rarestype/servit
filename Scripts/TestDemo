@@ -62,13 +62,3 @@ else
     echo "❌ TEST FAILED!"
     exit 1
 fi
-
-# Check binary size
-cp "$demo" Demo
-set +x
-
-ls -l Demo
-strip Demo
-ls -l Demo
-
-rm Demo

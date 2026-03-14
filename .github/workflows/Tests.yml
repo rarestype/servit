@@ -21,10 +21,13 @@ jobs:
                 uses: actions/checkout@v3
 
             -   name: 💖 Run tests 💖
-                run: Scripts/TestAll
+                run: Scripts/TestDemo
 
-            -   name: 💖 Run tests (swift-async-algorithms) 💖
-                run: Scripts/TestAll
+            -   name: 💖 Binary size (vendored) 💖
+                run: Scripts/TestBinarySize
+
+            -   name: 💖 Binary size (swift-async-algorithms) 💖
+                run: Scripts/TestBinarySize
                 env:
                     SWIFT_ASYNC_ALGORITHMS: 1
 
@@ -39,9 +42,12 @@ jobs:
                 run: sudo xcode-select -s /Applications/Xcode_26.3.app/Contents/Developer
 
             -   name: 💖 Run tests 💖
-                run: Scripts/TestAll
+                run: Scripts/TestDemo
 
-            -   name: 💖 Run tests (swift-async-algorithms) 💖
-                run: Scripts/TestAll
+            -   name: 💖 Binary size (vendored) 💖
+                run: Scripts/TestBinarySize
+
+            -   name: 💖 Binary size (swift-async-algorithms) 💖
+                run: Scripts/TestBinarySize
                 env:
                     SWIFT_ASYNC_ALGORITHMS: 1

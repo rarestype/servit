@@ -1,0 +1,17 @@
+#!/bin/bash
+
+set -euo pipefail
+
+swift --version
+swift build --package-path Examples -c release
+
+# Check binary size
+cp 'Examples/.build/release/Demo' Demo
+set -x
+
+ls -l Demo
+strip Demo
+ls -l Demo
+
+set +x
+rm Demo
