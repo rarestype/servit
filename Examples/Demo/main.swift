@@ -5,7 +5,6 @@ import NIOSSL
 
 // 1. Define your new server logic
 struct MyNewAppServer: HTTP.Server {
-
     func accept(request: HTTP.ServerRequest, method: HTTP.ServerMethod) async throws -> HTTP.ServerResponse {
         // Implement your new application's routing and response logic here
         switch request.uri.path {
