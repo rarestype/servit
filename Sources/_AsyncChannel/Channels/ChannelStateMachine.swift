@@ -133,18 +133,7 @@ struct ChannelStateMachine<Element: Sendable, Failure: Error>: Sendable {
                 return .resumeProducer
             }
 
-            if suspendedConsumers.isEmpty {
-                // we are idle or waiting for consumers
-                // we stack the incoming producer in a suspended state
-                suspendedProducers.append(suspendedProducer)
-                self.state = .channeling(
-                    suspendedProducers: suspendedProducers,
-                    cancelledProducers: cancelledProducers,
-                    suspendedConsumers: suspendedConsumers,
-                    cancelledConsumers: cancelledConsumers
-                )
-                return .none
-            } else {
+            guard suspendedConsumers.isEmpty else {
                 // we are waiting for producers
                 // we resume the first consumer
                 let suspendedConsumer = suspendedConsumers.removeFirst()
@@ -156,6 +145,16 @@ struct ChannelStateMachine<Element: Sendable, Failure: Error>: Sendable {
                 )
                 return .resumeProducerAndConsumer(continuation: suspendedConsumer.continuation)
             }
+            // we are idle or waiting for consumers
+            // we stack the incoming producer in a suspended state
+            suspendedProducers.append(suspendedProducer)
+            self.state = .channeling(
+                suspendedProducers: suspendedProducers,
+                cancelledProducers: cancelledProducers,
+                suspendedConsumers: suspendedConsumers,
+                cancelledConsumers: cancelledConsumers
+            )
+            return .none
 
         case .terminated:
             return .resumeProducer
@@ -312,18 +311,7 @@ struct ChannelStateMachine<Element: Sendable, Failure: Error>: Sendable {
                 return .resumeConsumer(element: nil)
             }
 
-            if suspendedProducers.isEmpty {
-                // we are idle or waiting for producers
-                // we stack the incoming consumer in a suspended state
-                suspendedConsumers.append(suspendedConsumer)
-                self.state = .channeling(
-                    suspendedProducers: suspendedProducers,
-                    cancelledProducers: cancelledProducers,
-                    suspendedConsumers: suspendedConsumers,
-                    cancelledConsumers: cancelledConsumers
-                )
-                return .none
-            } else {
+            guard suspendedProducers.isEmpty else {
                 // we are waiting for consumers
                 // we resume the first producer
                 let suspendedProducer = suspendedProducers.removeFirst()
@@ -338,6 +326,16 @@ struct ChannelStateMachine<Element: Sendable, Failure: Error>: Sendable {
                     element: suspendedProducer.element
                 )
             }
+            // we are idle or waiting for producers
+            // we stack the incoming consumer in a suspended state
+            suspendedConsumers.append(suspendedConsumer)
+            self.state = .channeling(
+                suspendedProducers: suspendedProducers,
+                cancelledProducers: cancelledProducers,
+                suspendedConsumers: suspendedConsumers,
+                cancelledConsumers: cancelledConsumers
+            )
+            return .none
 
         case .terminated(.finished):
             return .resumeConsumer(element: nil)

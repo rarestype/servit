@@ -30,4 +30,4 @@ extension _ErrorMechanism {
     }
 }
 
-extension Result: _ErrorMechanism { }
+extension Result: _ErrorMechanism {}

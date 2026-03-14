@@ -64,4 +64,4 @@ public final class AsyncThrowingChannel<Element: Sendable, Failure: Error>: Asyn
 }
 
 @available(*, unavailable)
-extension AsyncThrowingChannel.Iterator: Sendable { }
+extension AsyncThrowingChannel.Iterator: Sendable {}
