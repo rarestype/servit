@@ -3,6 +3,14 @@ import class Foundation.ProcessInfo
 import PackageDescription
 import CompilerPluginSupport
 
+var AsyncChannelVendored: Bool {
+    switch ProcessInfo.processInfo.environment["SWIFT_ASYNC_ALGORITHMS"] {
+    case "true"?: false
+    case "1"?: false
+    default: true
+    }
+}
+
 let package: Package = .init(
     name: "servit",
     platforms: [.macOS(.v15), .iOS(.v18), .tvOS(.v18), .visionOS(.v2), .watchOS(.v11)],
@@ -26,16 +34,22 @@ let package: Package = .init(
         .package(url: "https://github.com/apple/swift-nio", from: "2.79.0"),
         .package(url: "https://github.com/apple/swift-nio-ssl", from: "2.27.0"),
         .package(url: "https://github.com/apple/swift-nio-http2", from: "1.33.0"),
-
-        // needed for AsyncChannel
-        .package(url: "https://github.com/apple/swift-collections", from: "1.4.0"),
+        AsyncChannelVendored
+            ? .package(url: "https://github.com/apple/swift-collections", from: "1.4.0")
+            : .package(url: "https://github.com/apple/swift-async-algorithms", from: "1.1.3"),
     ],
     targets: [
-        .target(
+        AsyncChannelVendored ? .target(
             name: "_AsyncChannel",
             dependencies: [
                 .product(name: "OrderedCollections", package: "swift-collections"),
             ]
+        ) : .target(
+            name: "_AsyncChannel",
+            dependencies: [
+                .product(name: "AsyncAlgorithms", package: "swift-async-algorithms"),
+            ],
+            path: "Sources/AsyncChannel"
         ),
 
         .target(

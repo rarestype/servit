@@ -12,6 +12,8 @@ demo='Examples/.build/debug/Demo'
 PORT=8443
 ENDPOINT="https://localhost:$PORT/api/status"
 
+set +x
+
 echo "🔐 Generating temporary self-signed certificates..."
 # Redirecting stderr to /dev/null to hide the verbose OpenSSL output
 openssl req -x509 -newkey rsa:2048 -keyout key.pem -out cert.pem -sha256 -days 1 -nodes -subj "/CN=localhost" 2>/dev/null
@@ -56,8 +58,17 @@ echo ""
 # Assertions
 if [ "$HTTP_STATUS" -eq 200 ] && [ "$BODY" = "MyNewAppServer: OK" ]; then
     echo "✅ TEST PASSED!"
-    exit 0
 else
     echo "❌ TEST FAILED!"
     exit 1
 fi
+
+# Check binary size
+cp "$demo" Demo
+set +x
+
+ls -l Demo
+strip Demo
+ls -l Demo
+
+rm Demo

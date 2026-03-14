@@ -23,6 +23,11 @@ jobs:
             -   name: 💖 Run tests 💖
                 run: Scripts/TestAll
 
+            -   name: 💖 Run tests (swift-async-algorithms) 💖
+                run: Scripts/TestAll
+                env:
+                    SWIFT_ASYNC_ALGORITHMS: 1
+
     macos:
         runs-on: macos-26
         name: macOS
@@ -35,3 +40,8 @@ jobs:
 
             -   name: 💖 Run tests 💖
                 run: Scripts/TestAll
+
+            -   name: 💖 Run tests (swift-async-algorithms) 💖
+                run: Scripts/TestAll
+                env:
+                    SWIFT_ASYNC_ALGORITHMS: 1
