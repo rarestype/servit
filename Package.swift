@@ -26,7 +26,7 @@ let package: Package = .init(
         .package(url: "https://github.com/tayloraswift/swift-dom", from: "1.2.1"),
         .package(url: "https://github.com/tayloraswift/swift-grammar", from: "0.5.0"),
         .package(url: "https://github.com/tayloraswift/swift-hash", from: "0.7.1"),
-        .package(url: "https://github.com/tayloraswift/swift-ip", from: "0.3.3"),
+        .package(url: "https://github.com/rarestype/swift-ip", from: "0.3.3"),
         .package(url: "https://github.com/tayloraswift/swift-json", from: "1.1.2"),
         .package(url: "https://github.com/tayloraswift/swift-png", from: "4.4.9"),
         .package(url: "https://github.com/tayloraswift/swift-ucf", from: "0.2.0"),
