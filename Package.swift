@@ -29,7 +29,7 @@ let package: Package = .init(
         .package(url: "https://github.com/rarestype/swift-ip", from: "0.3.3"),
         .package(url: "https://github.com/tayloraswift/swift-json", from: "1.1.2"),
         .package(url: "https://github.com/tayloraswift/swift-png", from: "4.4.9"),
-        .package(url: "https://github.com/tayloraswift/swift-ucf", from: "0.2.0"),
+        .package(url: "https://github.com/rarestype/ucf", from: "0.2.1"),
         .package(url: "https://github.com/tayloraswift/swift-unixtime", from: "0.2.0"),
         .package(url: "https://github.com/apple/swift-nio", from: "2.79.0"),
         .package(url: "https://github.com/apple/swift-nio-ssl", from: "2.27.0"),
@@ -90,7 +90,7 @@ let package: Package = .init(
                 .product(name: "NIOHTTP2", package: "swift-nio-http2"),
                 .product(name: "NIOSSL", package: "swift-nio-ssl"),
                 .product(name: "TraceableErrors", package: "swift-grammar"),
-                .product(name: "URI", package: "swift-ucf"),
+                .product(name: "URI", package: "ucf"),
             ]
         ),
 
