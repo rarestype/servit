@@ -23,14 +23,12 @@ let package: Package = .init(
     ],
     dependencies: [
         .package(url: "https://github.com/ordo-one/dollup", from: "1.0.0"),
-        .package(url: "https://github.com/tayloraswift/swift-dom", from: "1.2.1"),
-        .package(url: "https://github.com/tayloraswift/swift-grammar", from: "0.5.0"),
-        .package(url: "https://github.com/tayloraswift/swift-hash", from: "0.7.1"),
-        .package(url: "https://github.com/rarestype/swift-ip", from: "0.3.3"),
-        .package(url: "https://github.com/tayloraswift/swift-json", from: "1.1.2"),
-        .package(url: "https://github.com/tayloraswift/swift-png", from: "4.4.9"),
+        .package(url: "https://github.com/rarestype/gram", from: "1.0.0"),
+        .package(url: "https://github.com/rarestype/h", from: "1.0.0"),
+        .package(url: "https://github.com/rarestype/swift-ip", from: "0.3.6"),
+        .package(url: "https://github.com/rarestype/swift-json", from: "2.3.2"),
+        .package(url: "https://github.com/rarestype/u", from: "1.1.0"),
         .package(url: "https://github.com/rarestype/ucf", from: "0.2.1"),
-        .package(url: "https://github.com/tayloraswift/swift-unixtime", from: "0.2.0"),
         .package(url: "https://github.com/apple/swift-nio", from: "2.79.0"),
         .package(url: "https://github.com/apple/swift-nio-ssl", from: "2.27.0"),
         .package(url: "https://github.com/apple/swift-nio-http2", from: "1.33.0"),
@@ -56,8 +54,8 @@ let package: Package = .init(
             name: "HTTP",
             dependencies: [
                 .target(name: "Media"),
-                .product(name: "ISO", package: "swift-unixtime"),
-                .product(name: "MD5", package: "swift-hash"),
+                .product(name: "ISO", package: "u"),
+                .product(name: "MD5", package: "h"),
                 .product(name: "NIOCore", package: "swift-nio"),
             ]
         ),
@@ -67,12 +65,11 @@ let package: Package = .init(
             dependencies: [
                 .target(name: "HTTP"),
                 .target(name: "Media"),
-                .product(name: "MD5", package: "swift-hash"),
-                .product(name: "HTML", package: "swift-dom"),
+                .product(name: "MD5", package: "h"),
                 .product(name: "NIOHTTP1", package: "swift-nio"),
                 .product(name: "NIOHTTP2", package: "swift-nio-http2"),
                 .product(name: "NIOSSL", package: "swift-nio-ssl"),
-                .product(name: "TraceableErrors", package: "swift-grammar"),
+                .product(name: "TraceableErrors", package: "gram"),
             ]
         ),
 
@@ -85,11 +82,10 @@ let package: Package = .init(
                 .product(name: "Firewalls", package: "swift-ip"),
                 .product(name: "IP", package: "swift-ip"),
                 .product(name: "IP_NIOCore", package: "swift-ip"),
-                .product(name: "HTML", package: "swift-dom"),
                 .product(name: "NIOHTTP1", package: "swift-nio"),
                 .product(name: "NIOHTTP2", package: "swift-nio-http2"),
                 .product(name: "NIOSSL", package: "swift-nio-ssl"),
-                .product(name: "TraceableErrors", package: "swift-grammar"),
+                .product(name: "TraceableErrors", package: "gram"),
                 .product(name: "URI", package: "ucf"),
             ]
         ),
@@ -100,7 +96,7 @@ let package: Package = .init(
             name: "Multiparts",
             dependencies: [
                 .target(name: "Media"),
-                .product(name: "Grammar", package: "swift-grammar"),
+                .product(name: "Grammar", package: "gram"),
             ]
         ),
 
@@ -108,7 +104,7 @@ let package: Package = .init(
             name: "SHA1_JSON",
             dependencies: [
                 .product(name: "JSON", package: "swift-json"),
-                .product(name: "SHA1", package: "swift-hash"),
+                .product(name: "SHA1", package: "h"),
             ]
         ),
     ]
