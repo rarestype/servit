@@ -1,4 +1,3 @@
-import HTML
 import HTTP
 import NIOCore
 import NIOHTTP1
@@ -6,7 +5,7 @@ import NIOPosix
 import NIOSSL
 
 extension HTTP.ServerOrigin {
-    func link(_ uri: String, rel: HTML.Attribute.Rel) -> String {
+    func link(_ uri: String, rel: String) -> String {
         "<\(self)\(uri)>; rel=\"\(rel)\""
     }
 }

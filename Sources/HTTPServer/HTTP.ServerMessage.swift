@@ -117,7 +117,7 @@ extension HTTP.ServerMessage {
         }
 
         if  let canonical: String = resource.headers.canonical {
-            self.headers.add(name: "link", value: origin.link(canonical, rel: .canonical))
+            self.headers.add(name: "link", value: origin.link(canonical, rel: "canonical"))
         }
         if  let count: Int = resource.headers.rateLimit.remaining {
             self.headers.add(name: "ratelimit-remaining", value: "\(count)")
