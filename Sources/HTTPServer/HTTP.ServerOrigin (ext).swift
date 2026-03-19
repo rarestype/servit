@@ -1,4 +1,3 @@
-import HTML
 import HTTP
 import NIOCore
 import NIOHTTP1
