@@ -23,7 +23,7 @@ let package: Package = .init(
         .library(name: "Multiparts", targets: ["Multiparts"]),
     ],
     dependencies: [
-        .package(url: "https://github.com/ordo-one/dollup", from: "1.0.0"),
+        .package(url: "https://github.com/ordo-one/dollup", from: "1.0.1"),
         .package(url: "https://github.com/rarestype/gram", from: "1.0.0"),
         .package(url: "https://github.com/rarestype/h", from: "1.0.0"),
         .package(url: "https://github.com/rarestype/swift-ip", from: "0.3.6"),

@@ -8,6 +8,7 @@ let package: Package = .init(
         .executable(name: "Demo", targets: ["Demo"]),
     ],
     dependencies: [
+        .package(url: "https://github.com/ordo-one/dollup", from: "1.0.1"),
         .package(name: "servit", path: ".."),
     ],
     targets: [
@@ -21,14 +22,14 @@ let package: Package = .init(
     ]
 )
 
-for target: PackageDescription.Target in package.targets {
+for target: Target in package.targets {
     switch target.type {
     case .binary: continue
     case .plugin: continue
     default: break
     }
     {
-        var settings: [PackageDescription.SwiftSetting] = $0 ?? []
+        var settings: [SwiftSetting] = $0 ?? []
 
         settings.append(.enableUpcomingFeature("ExistentialAny"))
         settings.append(.enableExperimentalFeature("StrictConcurrency"))
