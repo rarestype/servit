@@ -18,6 +18,7 @@ let package: Package = .init(
         .library(name: "HTTP", targets: ["HTTP"]),
         .library(name: "HTTPClient", targets: ["HTTPClient"]),
         .library(name: "HTTPServer", targets: ["HTTPServer"]),
+        .library(name: "HTTPServerRequests", targets: ["HTTPServerRequests"]),
         .library(name: "Media", targets: ["Media"]),
         .library(name: "Multiparts", targets: ["Multiparts"]),
     ],
@@ -90,6 +91,14 @@ let package: Package = .init(
             ]
         ),
 
+        .target(
+            name: "HTTPServerRequests",
+            dependencies: [
+                .target(name: "HTTPServer"),
+                .target(name: "Multiparts"),
+            ]
+        ),
+
         .target(name: "Media"),
 
         .target(
@@ -110,13 +119,13 @@ let package: Package = .init(
     ]
 )
 
-for target: PackageDescription.Target in package.targets {
+for target: Target in package.targets {
     if  target.name == "_AsyncChannel" {
         continue
     }
 
     {
-        var settings: [PackageDescription.SwiftSetting] = $0 ?? []
+        var settings: [SwiftSetting] = $0 ?? []
 
         settings.append(.enableUpcomingFeature("ExistentialAny"))
         settings.append(.enableExperimentalFeature("StrictConcurrency"))
