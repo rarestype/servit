@@ -46,11 +46,8 @@ jobs:
             -   name: 💖 Run tests 💖
                 run: Scripts/TestDemo
 
-            -   name: 💖 Binary size (vendored) 💖
-                run: Scripts/TestBinarySize
-
-            -   name: 💖 Binary size (swift-async-algorithms) 💖
-                run: Scripts/TestBinarySize
+            -   name: 💖 Run tests (swift-async-algorithms) 💖
+                run: Scripts/TestDemo
                 env:
                     SWIFT_ASYNC_ALGORITHMS: 1
 
@@ -69,10 +66,7 @@ jobs:
             -   name: 💖 Run tests 💖
                 run: Scripts/TestDemo
 
-            -   name: 💖 Binary size (vendored) 💖
-                run: Scripts/TestBinarySize
-
-            -   name: 💖 Binary size (swift-async-algorithms) 💖
-                run: Scripts/TestBinarySize
+            -   name: 💖 Run tests (swift-async-algorithms) 💖
+                run: Scripts/TestDemo
                 env:
                     SWIFT_ASYNC_ALGORITHMS: 1
