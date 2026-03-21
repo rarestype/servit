@@ -1,4 +1,4 @@
-name: tests
+name: Tests
 
 on:
     push:
@@ -20,7 +20,11 @@ jobs:
                 with:
                     files_ignore: |
                         README.md
+                        LICENSE
+                        NOTICE
+                        .mailmap
                         .gitignore
+                        .github/FUNDING.yml
         outputs:
             code_changed: ${{ steps.changes.outputs.any_changed }}
 
