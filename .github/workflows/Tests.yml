@@ -1,5 +1,7 @@
 name: Tests
 
+permissions:
+    contents: write
 on:
     push:
         branches: [ master ]
@@ -28,7 +30,7 @@ jobs:
         outputs:
             code_changed: ${{ steps.changes.outputs.any_changed }}
 
-    linux:
+    Linux:
         runs-on: ubuntu-24.04
         name: Ubuntu 24.04
         needs: changes
@@ -54,9 +56,12 @@ jobs:
                 env:
                     SWIFT_ASYNC_ALGORITHMS: 1
 
-    macos:
+            -   name: 💖 Update badge 💖
+                uses: rarestype/rarestbadge@v1
+                if: always()
+
+    macOS:
         runs-on: macos-26
-        name: macOS
         needs: changes
         if: ${{ needs.changes.outputs.code_changed == 'true' }}
         steps:
@@ -76,3 +81,7 @@ jobs:
                 run: Scripts/TestDemo
                 env:
                     SWIFT_ASYNC_ALGORITHMS: 1
+
+            -   name: 💖 Update badge 💖
+                uses: rarestype/rarestbadge@v1
+                if: always()
