@@ -3,7 +3,9 @@
 set -euo pipefail
 
 swift --version
-swift build --package-path Examples -c release
+swift build --package-path Examples \
+    -c release \
+    --experimental-lto-mode full
 
 # Check binary size
 cp 'Examples/.build/release/Demo' Demo
