@@ -6,7 +6,7 @@ enum MultipartTokenRule<Location>: ParsingRule {
 
     static func parse<Source>(
         _ input: inout ParsingInput<some ParsingDiagnostics<Source>>
-    ) throws -> String
+    ) throws(PatternMatchingError) -> String
         where Source: Collection<UInt8>, Source.Index == Location {
         let start: Location = input.index
         try input.parse(as: CodeUnit.self)

@@ -5,7 +5,7 @@ enum ContentDispositionRule<Location>: ParsingRule {
 
     static func parse<Source>(
         _ input: inout ParsingInput<some ParsingDiagnostics<Source>>
-    ) throws -> ContentDisposition?
+    ) throws(PatternMatchingError) -> ContentDisposition?
         where Source: Collection<UInt8>, Source.Index == Location {
         let keyword: String = try input.parse(as: MultipartTokenRule.self)
 

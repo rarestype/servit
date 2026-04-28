@@ -6,7 +6,7 @@ enum ContentTypeRule<Location>: ParsingRule {
 
     static func parse<Source>(
         _ input: inout ParsingInput<some ParsingDiagnostics<Source>>
-    ) throws -> ContentType?
+    ) throws(PatternMatchingError) -> ContentType?
         where Source: Collection<UInt8>, Source.Index == Location {
         let first: String = try input.parse(as: MultipartTokenRule.self)
         try input.parse(as: UnicodeEncoding.Slash.self)
