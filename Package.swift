@@ -24,7 +24,7 @@ let package: Package = .init(
     ],
     dependencies: [
         .package(url: "https://github.com/ordo-one/dollup", from: "1.0.1"),
-        .package(url: "https://github.com/rarestype/gram", from: "1.0.0"),
+        .package(url: "https://github.com/rarestype/gram", from: "2.0.0"),
         .package(url: "https://github.com/rarestype/h", from: "1.0.0"),
         .package(url: "https://github.com/rarestype/swift-ip", from: "0.3.10"),
         .package(url: "https://github.com/rarestype/swift-json", from: "3.3.0"),
