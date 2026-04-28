@@ -6,7 +6,7 @@ extension MultipartParameterRule.QuotedString {
 
         static func parse<Source>(
             _ input: inout ParsingInput<some ParsingDiagnostics<Source>>
-        ) throws -> Unicode.Scalar
+        ) throws(PatternMatchingError) -> Unicode.Scalar
             where Source: Collection<UInt8>, Source.Index == Location {
             try input.parse(as: UnicodeEncoding.Backslash.self)
             return try input.parse(as: EscapedCharacter.self)

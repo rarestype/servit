@@ -5,11 +5,10 @@ enum MultipartParameterRule<Location>: ParsingRule {
 
     static func parse<Source>(
         _ input: inout ParsingInput<some ParsingDiagnostics<Source>>
-    ) throws -> (
+    ) throws(PatternMatchingError) -> (
         name: String,
         value: String
-    )
-        where Source: Collection<UInt8>, Source.Index == Location {
+    ) where Source: Collection<UInt8>, Source.Index == Location {
         input.parse(as: HorizontalWhitespaceRule.self, in: Void.self)
 
         try input.parse(as: UnicodeEncoding.Semicolon.self)

@@ -6,7 +6,7 @@ enum MultipartHeaderRule: ParsingRule {
 
     static func parse<Source>(
         _ input: inout ParsingInput<some ParsingDiagnostics<Source>>
-    ) throws -> (
+    ) throws(PatternMatchingError) -> (
         disposition: ContentDisposition?,
         type: ContentType?
     )
