@@ -1,4 +1,4 @@
-import NIOCore
+public import NIOCore
 
 extension HTTP.Resource.Content {
     @frozen public enum Body: Equatable, Sendable {

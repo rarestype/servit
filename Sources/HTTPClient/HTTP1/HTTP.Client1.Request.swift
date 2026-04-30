@@ -1,5 +1,5 @@
-import NIOCore
-import NIOHTTP1
+public import NIOCore
+public import NIOHTTP1
 
 extension HTTP.Client1 {
     @frozen public struct Request: Sendable {

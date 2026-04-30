@@ -1,6 +1,6 @@
-import Firewalls
-import IP
-import ISO
+public import Firewalls
+public import IP
+public import ISO
 
 extension HTTP.ServerRequest {
     @frozen public struct Origin: Equatable, Sendable {

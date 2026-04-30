@@ -1,6 +1,6 @@
 import HTTP
-import NIOHPACK
-import NIOHTTP1
+public import NIOHPACK
+public import NIOHTTP1
 
 extension HTTP.ServerRequest {
     /// This type stores either ``HTTPHeaders`` or ``HPACKHeaders``, depending on the HTTP

@@ -1,8 +1,8 @@
-import NIOCore
-import NIOHPACK
+public import NIOCore
+public import NIOHPACK
 import NIOHTTP2
-import NIOPosix
-import NIOSSL
+public import NIOPosix
+public import NIOSSL
 
 extension HTTP {
     /// An HTTP/2 client associated with a single ``remote`` host. Always uses HTTPS.

@@ -1,5 +1,5 @@
-import MD5
-import Media
+public import MD5
+public import Media
 
 extension HTTP.Resource {
     @frozen public struct Content: Equatable, Sendable {

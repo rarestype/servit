@@ -1,4 +1,4 @@
-import NIOSSL
+public import NIOSSL
 
 extension HTTP {
     @frozen public enum ServerEncryptionLayer {
