@@ -1,4 +1,4 @@
-import Media
+public import Media
 
 @frozen public enum ContentType {
     case multipart(MultipartType)

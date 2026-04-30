@@ -1,5 +1,5 @@
 import NIOCore
-import NIOHPACK
+public import NIOHPACK
 import NIOHTTP2
 
 extension HTTP.Client2 {

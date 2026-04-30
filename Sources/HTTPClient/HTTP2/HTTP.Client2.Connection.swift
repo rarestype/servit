@@ -1,7 +1,6 @@
 import HTTP
-import NIOCore
-import NIOHPACK
-import NIOHTTP2
+public import NIOCore
+public import NIOHPACK
 
 extension HTTP.Client2 {
     @frozen public struct Connection {

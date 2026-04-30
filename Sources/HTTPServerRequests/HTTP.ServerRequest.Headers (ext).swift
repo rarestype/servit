@@ -1,9 +1,9 @@
-import HTTP
-import HTTPServer
-import MD5
-import Multiparts
-import NIOHPACK
-import NIOHTTP1
+public import HTTP
+public import HTTPServer
+public import MD5
+public import Multiparts
+public import NIOHPACK
+public import NIOHTTP1
 
 extension HTTP.ServerRequest.Headers {
     @inlinable public subscript(header: String) -> [String] {

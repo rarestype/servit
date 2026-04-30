@@ -1,5 +1,5 @@
 import Grammar
-import Media
+public import Media
 
 extension MultipartForm {
     @frozen public struct Item {

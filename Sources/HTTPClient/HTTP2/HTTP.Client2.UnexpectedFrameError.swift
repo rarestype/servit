@@ -1,4 +1,4 @@
-import NIOHTTP2
+public import NIOHTTP2
 
 extension HTTP.Client2 {
     @frozen public struct UnexpectedFrameError: Error, Sendable {

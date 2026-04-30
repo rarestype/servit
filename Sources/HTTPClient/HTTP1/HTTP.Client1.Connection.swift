@@ -1,5 +1,5 @@
 import HTTP
-import NIOCore
+public import NIOCore
 
 extension HTTP.Client1 {
     @frozen public struct Connection {

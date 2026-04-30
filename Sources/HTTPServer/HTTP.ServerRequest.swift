@@ -1,5 +1,4 @@
-import IP
-import URI
+public import URI
 
 extension HTTP {
     /// A ``ServerRequest`` contains all the metadata about an incoming request.

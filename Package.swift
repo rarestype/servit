@@ -127,6 +127,7 @@ for target: Target in package.targets {
     {
         var settings: [SwiftSetting] = $0 ?? []
 
+        settings.append(.enableUpcomingFeature("InternalImportsByDefault"))
         settings.append(.enableUpcomingFeature("ExistentialAny"))
         settings.append(.enableExperimentalFeature("StrictConcurrency"))
 

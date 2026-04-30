@@ -1,4 +1,4 @@
-import Media
+public import Media
 
 extension MultipartForm.Item {
     @frozen public struct Header {

@@ -1,5 +1,5 @@
-import Firewalls
-import IP
+public import Firewalls
+public import IP
 
 extension HTTP {
     public protocol ServerPolicy: AnyObject, Sendable {

@@ -1,6 +1,6 @@
-import NIOCore
-import NIOPosix
-import NIOSSL
+public import NIOCore
+public import NIOPosix
+public import NIOSSL
 
 extension HTTP {
     /// An HTTP/1.1 client associated with a single ``remote`` host.

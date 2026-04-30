@@ -1,4 +1,4 @@
-import NIOCore
+public import NIOCore
 
 extension HTTP {
     public protocol ClientConnection {
