@@ -45,8 +45,7 @@ extension HTTP.Client2.InterfaceHandler: ChannelOutboundHandler {
         self.owner = owner
 
         for request: HTTP.Client2.Request in batch {
-            self.multiplexer.createStreamChannel {
-                (channel: any Channel) in
+            self.multiplexer.createStreamChannel { (channel: any Channel) in
                 channel.eventLoop.makeCompletedFuture {
                     try channel.pipeline.syncOperations.addHandler(
                         HTTP.Client2.StreamHandler.init(owner: owner)

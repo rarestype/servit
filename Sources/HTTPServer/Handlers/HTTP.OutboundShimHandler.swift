@@ -4,8 +4,7 @@ import NIOHTTP1
 
 extension HTTP {
     final class OutboundShimHandler {
-        init() {
-        }
+        init() {}
     }
 }
 extension HTTP.OutboundShimHandler: ChannelOutboundHandler {

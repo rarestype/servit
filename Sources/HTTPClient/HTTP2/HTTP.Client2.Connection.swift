@@ -14,12 +14,12 @@ extension HTTP.Client2 {
         }
     }
 }
-@available(*, unavailable, message: """
+@available(
+    *, unavailable, message: """
     HTTP.Client2.Connection is not Sendable, use 'fetch(reducing:into:with:)' \
     to make requests in parallel.
-    """)
-extension HTTP.Client2.Connection: Sendable {
-}
+    """
+) extension HTTP.Client2.Connection: Sendable {}
 extension HTTP.Client2.Connection: HTTP.ClientConnection {
     @inlinable public func buffer(string: Substring) -> ByteBuffer {
         self.channel.allocator.buffer(substring: string)

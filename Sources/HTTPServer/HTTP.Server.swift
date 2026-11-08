@@ -78,8 +78,10 @@ extension HTTP.Server {
 
 
         if  let encryption: HTTP.ServerEncryptionLayer {
-            listener = try await bootstrap.bind(host: host, port: port) {
-                (channel: any Channel) in
+            listener = try await bootstrap.bind(
+                host: host,
+                port: port
+            ) { (channel: any Channel) in
 
                 if  case .local(let context) = encryption {
                     let encryptionHandler: NIOSSLServerHandler = .init(context: context)
@@ -90,8 +92,7 @@ extension HTTP.Server {
                     }
                 }
 
-                return channel.configureAsyncHTTPServerPipeline {
-                    (connection: any Channel) in
+                return channel.configureAsyncHTTPServerPipeline { (connection: any Channel) in
 
                     connection.eventLoop.makeCompletedFuture {
                         try connection.pipeline.syncOperations.addHandler(
@@ -106,12 +107,10 @@ extension HTTP.Server {
                             configuration: .init()
                         )
                     }
-                } http2ConnectionInitializer: {
-                    (connection: any Channel) in
+                } http2ConnectionInitializer: { (connection: any Channel) in
 
                     connection.eventLoop.makeCompletedFuture { connection }
-                } http2StreamInitializer: {
-                    (stream: any Channel) in
+                } http2StreamInitializer: { (stream: any Channel) in
 
                     stream.eventLoop.makeCompletedFuture {
                         guard
@@ -132,8 +131,10 @@ extension HTTP.Server {
                 }
             }
         } else {
-            listener = try await bootstrap.bind(host: host, port: port) {
-                (connection: any Channel) in
+            listener = try await bootstrap.bind(
+                host: host,
+                port: port
+            ) { (connection: any Channel) in
 
                 connection.eventLoop.makeCompletedFuture {
                     let decoder: HTTPRequestDecoder = .init(leftOverBytesStrategy: .dropBytes)
@@ -455,7 +456,8 @@ extension HTTP.Server {
                     //  determines the retry behavior.
                     connection.write(
                         HTTP2Frame.init(
-                            streamID: 0, payload: .goAway(
+                            streamID: 0,
+                            payload: .goAway(
                                 lastStreamID: .maxID,
                                 errorCode: .noError,
                                 opaqueData: nil
@@ -467,7 +469,8 @@ extension HTTP.Server {
                     //  shutdown and will not retry any cancelled requests.
                     connection.write(
                         HTTP2Frame.init(
-                            streamID: 0, payload: .goAway(
+                            streamID: 0,
+                            payload: .goAway(
                                 lastStreamID: last,
                                 errorCode: .noError,
                                 opaqueData: nil

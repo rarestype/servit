@@ -36,8 +36,9 @@ extension AsyncSequence where Element: Sendable {
         with body: @Sendable @escaping (Element) async -> ()
     ) async throws {
         var iterator: AsyncIterator = self.makeAsyncIterator()
-        let exit: Result<Void, any Error> = await withTaskGroup(of: Void.self) {
-            (tasks: inout TaskGroup<Void>) in
+        let exit: Result<Void, any Error> = await withTaskGroup(
+            of: Void.self
+        ) { (tasks: inout TaskGroup<Void>) in
 
             do {
                 for _: Int in 0 ..< width {

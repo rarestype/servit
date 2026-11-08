@@ -13,11 +13,11 @@ extension HTTP.Client1 {
         }
     }
 }
-@available(*, unavailable, message: """
+@available(
+    *, unavailable, message: """
     HTTP.Client1.Connection is not Sendable.
-    """)
-extension HTTP.Client1.Connection: Sendable {
-}
+    """
+) extension HTTP.Client1.Connection: Sendable {}
 extension HTTP.Client1.Connection: HTTP.ClientConnection {
     @inlinable public func buffer(string: Substring) -> ByteBuffer {
         self.channel.allocator.buffer(substring: string)
@@ -34,8 +34,9 @@ extension HTTP.Client1.Connection {
         _ request: __owned HTTP.Client1.Request,
         timeout: Duration = .seconds(15)
     ) async throws -> HTTP.Client1.Facet {
-        try await withThrowingTaskGroup(of: HTTP.Client1.Facet.self) {
-            (tasks: inout ThrowingTaskGroup<HTTP.Client1.Facet, any Error>) in
+        try await withThrowingTaskGroup(
+            of: HTTP.Client1.Facet.self
+        ) { (tasks: inout ThrowingTaskGroup<HTTP.Client1.Facet, any Error>) in
 
             let channel: any Channel = self.channel
 
