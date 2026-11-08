@@ -20,8 +20,7 @@ extension HTTP.Client1 {
     public init(threads: MultiThreadedEventLoopGroup, niossl: NIOSSLContext?, remote: String) {
         let _bootstrap: ClientBootstrap = .init(group: threads)
             .connectTimeout(.seconds(3))
-            .channelInitializer {
-                (channel: any Channel) in
+            .channelInitializer { (channel: any Channel) in
 
                 channel.eventLoop.makeCompletedFuture {
                     if  let niossl: NIOSSLContext {

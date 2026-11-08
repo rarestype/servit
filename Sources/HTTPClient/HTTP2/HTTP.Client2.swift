@@ -23,8 +23,7 @@ extension HTTP.Client2 {
     public init(threads: MultiThreadedEventLoopGroup, niossl: NIOSSLContext, remote: String) {
         let _bootstrap: ClientBootstrap = .init(group: threads)
             .connectTimeout(.seconds(3))
-            .channelInitializer {
-                (channel: any Channel) in
+            .channelInitializer { (channel: any Channel) in
                 channel.eventLoop.makeCompletedFuture {
                     let tlsHandler: NIOSSLClientHandler = try .init(
                         context: niossl,
@@ -38,8 +37,7 @@ extension HTTP.Client2 {
                         mode: .client,
                         connectionConfiguration: .init(),
                         streamConfiguration: .init()
-                    ) {
-                        (channel: any Channel) in
+                    ) { (channel: any Channel) in
                         channel.eventLoop.makeCompletedFuture {
                             //  With no owner, the stream is unsolicited and will drop any
                             //  responses it receives.

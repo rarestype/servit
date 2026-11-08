@@ -24,8 +24,7 @@ extension HTTP.ServerOrigin {
         let listener: NIOAsyncChannel<any Channel, Never> = try await bootstrap.bind(
             host: host,
             port: port
-        ) {
-            (connection: any Channel) in
+        ) { (connection: any Channel) in
 
             connection.eventLoop.makeCompletedFuture {
                 try connection.pipeline.syncOperations.configureHTTPServerPipeline(
@@ -41,8 +40,7 @@ extension HTTP.ServerOrigin {
         }
 
         try await listener.executeThenClose {
-            try await $0.iterate(concurrently: 20) {
-                (connection: any Channel) in
+            try await $0.iterate(concurrently: 20) { (connection: any Channel) in
 
                 /// Once we receive a connection, the peer has 4 seconds to send a request
                 /// before we enforce a timeout.
